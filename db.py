@@ -2,6 +2,7 @@
 
 import pyrebase
 
+
 class FireBaseConnection:
     def connect_to_db(self):
         fire_base_config = {

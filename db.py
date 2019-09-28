@@ -15,6 +15,11 @@ class FireBaseConnection:
             "appId": "1:63356394783:web:9e653b492c50427c14e42a",
             "serviceAccount": "config.json"
         }
-        fire_base = pyrebase.initialize_app(fire_base_config)
+        self.fire_base = pyrebase.initialize_app(fire_base_config)
         # result = fire_base.get('/users', None)
-        print(fire_base)
+        print(self.fire_base)
+
+        # Get a reference to the database service
+        db = self.fire_base.database()
+        # companies = db.child("companies").get()
+        # print(companies.val())

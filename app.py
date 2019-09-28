@@ -19,6 +19,7 @@ def hello():
 def connect():
     fire_base_connection = FireBaseConnection()
     fire_base_connection.connect_to_db()
+    return fire_base_connection
 
 
 @app.route('/validate-company')
@@ -29,9 +30,12 @@ def validate_company():
     if request.method == "GET":
         if 'company_name' in request.args:
             # db connection
-            data = {
-                'validation': True
-            }
+            fire_base_connection = connect()
+            lstCompanies = fire_base_connection.get_companies()
+            if request.args['company_name'].lower() in lstCompanies:
+                data = {
+                    'validation': True
+                }
             # return 'Hello ' + request.args['company_name']
     js = json.dumps(data)
     return Response(js, status=200, mimetype='application/json')

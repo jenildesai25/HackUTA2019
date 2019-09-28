@@ -20,6 +20,32 @@ class FireBaseConnection:
         print(self.fire_base)
 
         # Get a reference to the database service
-        db = self.fire_base.database()
+        # db = self.fire_base.database()
         # companies = db.child("companies").get()
         # print(companies.val())
+
+    def get_companies(self):
+        db = self.fire_base.database()
+        # companies = db.child("companies").child("company_name").get()
+
+        # print()
+        # print(companies.val())
+        # print(companies.key())
+        # print()
+
+        companies = db.child("companies").get()
+
+        lstCompanies = list()
+        for company in companies.each():
+            # print(company.key())
+            # print(company.val())
+            for key, value in dict(company.val()).items():
+                if key != "company_name":
+                    continue
+                lstCompanies.append(value.lower())
+                # print(key)
+                # print(value)
+
+        # print(companies.child("company_name").get().val())
+        # print(companies.child("company_name").get().key())
+        return lstCompanies
